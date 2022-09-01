@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/stylesheet.css}">
+    <style>
+        body{text-align:center;
+        font-family:sans-serif;
+        background-color:white;
+
+        }
+
+        #header{color:white;
+        background-color:rgba(15, 22, 38, 1);
+        font-size:250%;text-align:left;
+        position:relative;
+        padding-right:1%;
+        }
+
+        #welcome::before{content:"Welcome ";color:white;}
+
+        #pages{width:225px;
+        padding-left:25px;
+        height:100%;
+         background-color:#23395d;
+         position:absolute;top:0;left:0;
+         transform: translateX(-100%);
+         }
+         a{padding:2% !important;}
+
+         #side-nav-btn:hover{cursor:pointer;}
+
+         @keyframes shiftRight{from{margin-left: 0px} to{margin-left:250px}}
+         @keyframes slideRight{from{transform: translateX(-100%);} to{transform: translateX(0%);}}
+         .shift-right{
+            animation-name:shiftRight;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+         @keyframes shiftRightReverse{from{margin-left: 250px} to{margin-left:0px}}
+         .shift-right-reverse{
+            animation-name:shiftRightReverse;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+         .slide-right{
+             animation-name:slideRight;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+         @keyframes slideRightReverse{from{transform: translateX(0%);} to{transform: translateX(-100%);}}
+          .slide-right-reverse{
+             animation-name:slideRightReverse;
+            animation-duration:0.5s;
+            animation-fill-mode: forwards;
+         }
+
+    </style>
+    <script>
+        let open = false;
+       function sideNav(){
+            var btn = document.getElementById("side-nav-btn");
+            var header = document.getElementById("header");
+            var sideNav = document.getElementById("pages");
+            if(!open){
+                open = true;
+                header.classList.replace("shift-right-reverse", "shift-right");
+                sideNav.classList.replace("slide-right-reverse", "slide-right");
+
+            }
+            else{
+                open = false;
+                header.classList.replace("shift-right", "shift-right-reverse");
+                sideNav.classList.replace("slide-right", "slide-right-reverse");
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div id="header" class="shift-right-reverse">
+    <span id="side-nav-btn" onclick="sideNav();">&#9776;</span> Dashboard
+
+    <span th:text="${user.username}" style="float:right;color:grey;font-size:50%;" id="welcome"></span>
+</div>
+
+<div id="pages" align="left" class="slide-right-reverse">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a th:href="@{createShipment}" style="" class="page-link">Create Shipment</a>
+    <br>
+    <br>
+    <br>
+    <a th:href="@{devices}" style="" class="page-link">Devices Data Stream</a>
+    <br>
+    <br>
+    <br>
+<a th:href="@{logout}" class="page-link">Logout</a>
+</div>
+</body>
+</html>

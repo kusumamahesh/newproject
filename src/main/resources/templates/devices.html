@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Devices Data Stream</title>
+    <style>
+        table{
+            margin: auto;
+            color: white;
+            background-color: rgba(242, 243, 247, 0.1);
+        }
+        table, th, td{border: 1px solid rgb(242, 243, 247);font-family: Calibri}
+    </style>
+  <link rel="stylesheet" th:href="@{/stylesheet.css}">
+</head>
+<body>
+<br>
+<a class="page-link" th:href="@{dashboard}">Dashboard</a>
+<br><br>
+<table>
+    <tr>
+        <th th:each="key : ${devices[0].keySet()}" th:text="${key}"></th>
+    </tr>
+  <tr th:each="device : ${devices}">
+    <td th:each="key : ${device.keySet()}" th:text="${device.get(key)}"></td>
+  </tr>
+</table>
+</body>
+</html>

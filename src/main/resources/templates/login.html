@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login!</title>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+       function onSubmit(token) {
+         document.getElementById("demo-form").submit();
+       }
+     </script>
+  <style>
+  body{background-color:rgb(1 191 249);}
+    form {background-color: rgb(242 243 247);
+        font-family:sans-serif;
+        font-size:300%;
+        width:fit-content;
+        margin:auto;
+        padding:5%;
+        }
+
+        #error{color:red;font-size:20%;}
+
+    input {width:100%;}
+
+    a{font-size:25%;}
+
+  </style>
+  <link rel="stylesheet" th:href="@{/stylesheet.css}">
+</head>
+<body>
+<br>
+<form method="post" action="#" th:object="${user}" th:action="@{login}" id="demo-form">
+  Login<br>
+    <div id="error" th:text="${error}"></div>
+  <input name="username" placeholder="Enter Username" th:field="*{username}" />
+  <br>
+  <input name="password" type="password" placeholder="Enter Password" th:field="*{password}" />
+  <br>
+  <button class="g-recaptcha" data-sitekey="6LfNIqUgAAAAACSL6oQkgrf9GX6px05J7OzIRtzY" data-callback='onSubmit'
+          style="background-color:#800000;color:white;font-weight:bold;border-radius:25px">Submit</button>
+  <a href="../register">Sign Up!</a>
+</form>
+</body>
+</html>
